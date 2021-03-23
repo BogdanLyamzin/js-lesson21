@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<template id="card-template">
+    <div class="card">
+        <h3 class="card-title">{{title}}</h3>
+        <p class="card-description">{{description}}</p>
+        <ul class="reviews-list">
+            {{#each reviews}}
+            <li class="reviews-item">{{this}}</li>
+            {{/each}}
+        </ul>
+    </div>
+</template>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+<script>
+    console.log(Handlebars);
+
+    const cardTemplate = document.querySelector('#card-template').innerHTML.trim();
+    console.log(cardTemplate);
+
+    const cardCreateFunction = Handlebars.compile(cardTemplate);
+    console.log(cardCreateFunction);
+
+    const cardData = {
+        title: "Пушистый котик",
+        description: "Огромная жирная наглая тушка",
+        reviews: ["Ночью носится как сумасшедший - рекомендую",
+            "Всегда просит есть - скоро перестанет пролазить в дверь",
+            "Сам умеет открывать холодильник"]
+    };
+
+    const cardHTMLTemplate = cardCreateFunction(cardData);
+    console.log(cardHTMLTemplate)
+    document.body.insertAdjacentHTML("beforeend", cardHTMLTemplate)
+</script>
+</body>
+</html>
