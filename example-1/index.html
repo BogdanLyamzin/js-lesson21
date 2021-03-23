@@ -19,13 +19,31 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
 <script>
-    console.log(Handlebars);
+    // const sectionTitleTemplate = document.getElementById("card-template").innerHTML.trim();
+    // const templateArr = sectionTitleTemplate.split(">");
+    // const sectionTitle = `${templateArr[0]}>  Заголовок страницы ${templateArr[1]}>`
+    // document.body.insertAdjacentHTML("beforeend", sectionTitle)
 
-    const cardTemplate = document.querySelector('#card-template').innerHTML.trim();
-    console.log(cardTemplate);
+    // console.log(Handlebars);
 
-    const cardCreateFunction = Handlebars.compile(cardTemplate);
-    console.log(cardCreateFunction);
+    const cardTemplateString = document.querySelector('#card-template').innerHTML.trim();
+    // console.log(cardTemplateString);
+
+    const cardCreateFunction = Handlebars.compile(cardTemplateString);
+    /*
+    const cardCreateFunction = function(obj){
+        return `<div class="card">
+        <h3 class="card-title">${obj.title}</h3>
+        <p class="card-description">${obj.description}</p>
+        <ul class="reviews-list">
+            {{#each reviews}}
+            <li class="reviews-item">{{this}}</li>
+            {{/each}}
+        </ul>
+    </div>`
+    }
+    */
+    // console.log(cardCreateFunction);
 
     const cardData = {
         title: "Пушистый котик",
@@ -35,9 +53,23 @@
             "Сам умеет открывать холодильник"]
     };
 
-    const cardHTMLTemplate = cardCreateFunction(cardData);
-    console.log(cardHTMLTemplate)
-    document.body.insertAdjacentHTML("beforeend", cardHTMLTemplate)
+    const cardData2 = {
+        title: "Летающая сарделька",
+        description: "Может съесть на лету",
+        reviews: ["Ночью носится как сумасшедший - рекомендую",
+            "Всегда просит есть - скоро перестанет пролазить в дверь",
+            "Сам умеет открывать холодильник"]
+    };
+
+    const cardHTMarkup = cardCreateFunction(cardData);
+    const cardHTMarkup2 = cardCreateFunction(cardData2);
+    // console.log(cardHTMarkup)
+    document.body.insertAdjacentHTML("beforeend", cardHTMarkup)
+    document.body.insertAdjacentHTML("beforeend", cardHTMarkup2)
+    // 1. Считать шаблон
+    // 2. Засунуть шаблон в Handlebars - получишь функцию для генерации HTML-разметки
+    // 3. Засунули в функцию объект с данными - получили HTML-разметку
+    // 4. Вставили разметку в DOM
 </script>
 </body>
 </html>
